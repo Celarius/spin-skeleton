@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title><?=$this->e($title)?></title>
+  </head>
+<body>
+<!-- page header -->
+<?php $this->fetch('pageHeader') ?>
+
+<!-- page content -->
+<?=$this->section('content')?>
+
+<!-- page footer -->
+<?php $this->fetch('pageFooter') ?>
+
+</body>
+</html>

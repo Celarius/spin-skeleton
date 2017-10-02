@@ -1,0 +1,64 @@
+{
+  "common": {
+    "before": [
+      "\\App\\Middlewares\\CorsBeforeMiddleware"
+    ],
+    "after": [
+      "\\App\\Middlewares\\RequestIdAfterMiddleware",
+      "\\App\\Middlewares\\ResponseTimeAfterMiddleware",
+      "\\App\\Middlewares\\ResponseLogAfterMiddleware"
+    ]
+  },
+  "groups": [
+    {
+      "name": "unversioned",
+      "notes": "",
+      "prefix": "/api",
+      "before": [],
+      "routes": [
+        { "methods":[],       "path":"/health",           "handler":"\\App\\Controllers\\HealthController" },
+        { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\StatusController" }
+      ],
+      "after": []
+    },
+    {
+      "name":"Public",
+      "notes": "Public endpoints",
+      "prefix": "/api/v1",
+      "before": [],
+      "routes": [
+        { "methods":[],       "path":"/groups[/{uuid}]",       "handler":"\\App\\Controllers\\v1\\GroupController" },
+        { "methods":[],       "path":"/namespaces[/{uuid}]",   "handler":"\\App\\Controllers\\v1\\NamespaceController" },
+        { "methods":[],       "path":"/components[/{uuid}]",   "handler":"\\App\\Controllers\\v1\\ComponentController" },
+        { "methods":[],       "path":"/properties[/{uuid}]",   "handler":"\\App\\Controllers\\v1\\ComponentPropertyController" },
+        { "methods":[],       "path":"/instances[/{uuid}]",    "handler":"\\App\\Controllers\\v1\\InstanceController" }
+      ],
+      "after": []
+    },
+    {
+      "name":"Private",
+      "notes": "Private endpoints",
+      "prefix": "/api/v1",
+      "before": [
+        "\\App\\Middlewares\\AuthHttpBeforeMiddleware"
+      ],
+      "routes": [
+      ],
+      "after": []
+    },
+    {
+      "name":"Default",
+      "notes": "Default route if nothing matches",
+      "prefix": "",
+      "before": [
+        "\\App\\Middlewares\\SessionBeforeMiddleware"
+      ],
+      "routes": [
+        { "methods":[],        "path":"/a",               "handler":"\\App\\Controllers\\AController" },
+        { "methods":[],        "path":"/b",               "handler":"\\App\\Controllers\\BController" },
+        { "methods":[],        "path":"/",                "handler":"\\App\\Controllers\\IndexController" }
+      ],
+      "after": []
+    }
+  ]
+}
