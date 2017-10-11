@@ -27,11 +27,6 @@
       "prefix": "/api/v1",
       "before": [],
       "routes": [
-        { "methods":[],       "path":"/groups[/{uuid}]",       "handler":"\\App\\Controllers\\v1\\GroupController" },
-        { "methods":[],       "path":"/namespaces[/{uuid}]",   "handler":"\\App\\Controllers\\v1\\NamespaceController" },
-        { "methods":[],       "path":"/components[/{uuid}]",   "handler":"\\App\\Controllers\\v1\\ComponentController" },
-        { "methods":[],       "path":"/properties[/{uuid}]",   "handler":"\\App\\Controllers\\v1\\ComponentPropertyController" },
-        { "methods":[],       "path":"/instances[/{uuid}]",    "handler":"\\App\\Controllers\\v1\\InstanceController" }
       ],
       "after": []
     },
@@ -48,14 +43,12 @@
     },
     {
       "name":"Default",
-      "notes": "Default route if nothing matches",
+      "notes": "Default route if nothing else matches",
       "prefix": "",
       "before": [
         "\\App\\Middlewares\\SessionBeforeMiddleware"
       ],
       "routes": [
-        { "methods":[],        "path":"/a",               "handler":"\\App\\Controllers\\AController" },
-        { "methods":[],        "path":"/b",               "handler":"\\App\\Controllers\\BController" },
         { "methods":[],        "path":"/",                "handler":"\\App\\Controllers\\IndexController" }
       ],
       "after": []

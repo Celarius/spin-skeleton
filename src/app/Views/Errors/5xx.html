@@ -1,8 +1,6 @@
-<?php $this->start('content') ?>
+<?php $this->layout('pages::layout.base',['title'=>$this->e($title)]) ?>
 
+<?php $this->start('main.content') ?>
   <h2>Oops, something went wrong!</h2>
-  <p>
-    <?= echo $this->($errorMessage); ?>
-  </p>
-
+  <p>Hello, <?=$this->e($message)?></p>
 <?php $this->stop() ?>

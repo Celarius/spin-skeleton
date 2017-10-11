@@ -1,8 +1,5 @@
-<?php $this->start('content') ?>
+<?php $this->layout('pages::layout.base',['title'=>$this->e($title)]) ?>
 
-  <h2>Darn, That page was not found!</h2>
-  <p>
-    <?= echo $this->($errorMessage); ?>
-  </p>
-
+<?php $this->start('main.content') ?>
+  <h2>That is not the page you are looking for</h2>
 <?php $this->stop() ?>

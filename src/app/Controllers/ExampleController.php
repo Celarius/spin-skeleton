@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use \App\Controllers\AbstractController;
+use \App\Controllers\AbstractPlatesController;
 
-class ExampleController extends AbstractController
+class ExampleController extends AbstractPlatesController
 {
   /**
    * Handle GET request
@@ -37,7 +37,7 @@ class ExampleController extends AbstractController
     $postParam = postParam('q'); // null if not found
 
     # Generate a Not Implemented response
-    return response($this->engine->render('errors:4xx'), 405);
+    return response($this->engine->render('errors::405'), 405);
   }
 
   /**
@@ -52,7 +52,7 @@ class ExampleController extends AbstractController
     $postParam = postParam('q'); // null if not found
 
     # Generate a Not Implemented response
-    return response($this->engine->render('errors:4xx'), 405);
+    return response($this->engine->render('errors::405'), 405);
   }
 
   /**
@@ -67,7 +67,7 @@ class ExampleController extends AbstractController
     $postParam = postParam('q'); // null if not found
 
     # Generate a Not Implemented response
-    return response($this->engine->render('errors:4xx'), 405);
+    return response($this->engine->render('errors::405'), 405);
   }
 
   /**
@@ -79,7 +79,7 @@ class ExampleController extends AbstractController
   public function handleDELETE(array $args)
   {
     # Generate a Not Implemented response
-    return response($this->engine->render('errors:4xx'), 405);
+    return response($this->engine->render('errors::405'), 405);
   }
 
   /**
@@ -91,10 +91,7 @@ class ExampleController extends AbstractController
   public function handleHEAD(array $args)
   {
     # Do what the GET does, but return NO body
-    $r = $this->handleGET($args);
-
-    # Set the response clearing the body
-    return response('', getResponse()->getStatusCode() );
+    return $this->handleGET($args)->withBody('');
   }
 
   /**
@@ -106,7 +103,7 @@ class ExampleController extends AbstractController
   public function handleOPTIONS(array $args)
   {
     # Generate a Not Implemented response
-    return response($this->engine->render('errors:4xx'), 405);
+    return response($this->engine->render('errors::405'), 405);
   }
 
   /**
@@ -118,7 +115,7 @@ class ExampleController extends AbstractController
   public function handleCUSTOM(array $args)
   {
     # Generate a Not Implemented response
-    return response($this->engine->render('errors:4xx'), 405);
+    return response($this->engine->render('errors::405'), 405);
   }
 
 }

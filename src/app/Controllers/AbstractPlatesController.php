@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /**
- * Abstract Controller
+ * Abstract Plates Controller
  *
  * Initializes The Leauge Plates Template engine,
  * loading the settings from the config file
@@ -11,7 +11,7 @@ namespace App\Controllers;
 
 use \Spin\Core\Controller;
 
-abstract class AbstractController extends Controller
+abstract class AbstractPlatesController extends Controller
 {
   /** @var Object       The Leauge Template Engine */
   protected $engine;

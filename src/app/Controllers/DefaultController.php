@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use \App\Controllers\AbstractController;
+use \App\Controllers\AbstractPlatesController;
 
-class DefaultController extends AbstractController
+class DefaultController extends AbstractPlatesController
 {
   /**
    * Handle GET request
