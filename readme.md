@@ -2,8 +2,7 @@
 
 [Spin framework](https://github.com/Celarius/spin-framework) application example
 
-Uses the following PSR implementations
-
+Uses the following implementations and Factories:
 * Guzzle for HTTP Factories
 * Plates for Template engine (via /App/Controllers/AbstractController.php)
 * Monolog for Logging
