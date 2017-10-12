@@ -1,149 +1,155 @@
 {
-    "application":
-    {
-        "code": "spin-skeleton",
-        "name": "spin-skeleton",
-        "version": "1.0.0",
-        "global":
-        {
-            "maintenance": false,
-            "message": "We are in maintenance mode, back shortly",
-            "timezone": "Europe\/Stockholm"
-        },
-        "secret": "${application-secret}"
+  "application": {
+    "code": "spin-skeleton",
+    "name": "spin-skeleton",
+    "version": "1.0.0",
+    "global": {
+      "maintenance": false,
+      "message": "We are in maintenance mode, back shortly",
+      "timezone": "Europe/Stockholm"
     },
-
-    "session": {
-        "cookie": "SID",
-        "timeout": 3600,
-        "refresh": 600,
-        "driver": "apcu",
-        "apcu": {
-            "option": "value"
-        }
-    },
-
-    "templates": {
-        "extension": "html",
-        "errors": "/Views/Errors",
-        "pages": "/Views/Pages"
-    },
-
-    "factories": {
-        "http": {
-            "serverRequest": {
-                "class": "\\Spin\\Factories\\Http\\ServerRequestFactory",
-                "options": []
-            },
-            "request": {
-                "class": "\\Spin\\Factories\\Http\\RequestFactory",
-                "options": []
-            },
-            "response": {
-                "class": "\\Spin\\Factories\\Http\\ResponseFactory",
-                "options": []
-            },
-            "stream": {
-                "class": "\\Spin\\Factories\\Http\\StreamFactory",
-                "options": []
-            },
-            "uploadedFile": {
-                "class": "\\Spin\\Factories\\Http\\UploadedFileFactory",
-                "options": []
-            },
-            "uri": {
-                "class": "\\Spin\\Factories\\Http\\UriFactory",
-                "options": []
-            }
-        },
-        "container": {
-            "class": "\\Spin\\Factories\\ContainerFactory",
-            "options": [
-            {
-                "autowire": true
-            }]
-        },
-        "cache": {
-            "class": "\\Spin\\Factories\\CacheFactory",
-            "options": []
-        },
-        "event":
-        {
-            "class": "\\Spin\\Factories\\EventFactory",
-            "options": []
-        }
-    },
-
-    "hooks": [
-    {
-        "OnBeforeRequest": [
-            "\\App\\Hooks\\OnBeforeRequest"
-        ],
-        "OnAfterRequest": [
-            "\\App\\Hooks\\OnAfterRequest"
-        ]
-    }],
-
-    "logger":
-    {
-        "level": "error",
-        "driver": "php",
-        "drivers":
-        {
-            "php":
-            {
-                "line_format": "[%channel%] [%level_name%] %message% %context%",
-                "line_datetime": "Y-m-d H:i:s.v e"
-            },
-            "file":
-            {
-                "file_path": "storage\/log",
-                "file_format": "Y-m-d",
-                "line_format": "[%datetime%] [%channel%] [%level_name%] %message% %context%",
-                "line_datetime": "Y-m-d H:i:s.v e"
-            }
-        }
-    },
-
-    "connections":
-    {
-        "example_mysql":
-        {
-            "type": "Pdo",
-            "driver": "mysql",
-            "schema": "<db_schema_name>",
-            "host": "localhost",
-            "port": 3306,
-            "username": "root",
-            "password": "*****",
-            "charset": "UTF8",
-            "options": [
-                {"ATTR_PERSISTENT": true},
-                {"ATTR_ERRMODE": "ERRMODE_EXCEPTION"},
-                {"ATTR_AUTOCOMMIT": false}
-            ]
-        },
-        "example_firebird":
-        {
-            "type": "Pdo",
-            "driver": "firebird",
-            "schema": "<path_to_db>",
-            "host": "localhost",
-            "port": 3050,
-            "username": "sysdba",
-            "password": "********",
-            "charset": "UTF8",
-            "options": [
-                {"ATTR_PERSISTENT": true},
-                {"ATTR_ERRMODE": "ERRMODE_EXCEPTION"},
-                {"ATTR_AUTOCOMMIT": false}
-            ]
-        },
-        "example_sqlite":
-        {
-            "type": "Pdo",
-            "driver": "SqlLite",
-            "filename": "storage\\database\\db.sqlite"
-        }
+    "secret": "${application-secret}"
+  },
+  "session": {
+    "cookie": "SID",
+    "timeout": 3600,
+    "refresh": 600,
+    "driver": "apcu",
+    "apcu": {
+      "option": "value"
     }
+  },
+  "logger": {
+    "level": "error",
+    "driver": "php",
+    "drivers": {
+      "php": {
+        "line_format": "[%channel%] [%level_name%] %message% %context%",
+        "line_datetime": "Y-m-d H:i:s.v e"
+      },
+      "file": {
+        "file_path": "storage/log",
+        "file_format": "Y-m-d",
+        "line_format": "[%datetime%] [%channel%] [%level_name%] %message% %context%",
+        "line_datetime": "Y-m-d H:i:s.v e"
+      }
+    }
+  },
+  "templates": {
+    "extension": "html",
+    "errors": "/Views/Errors",
+    "pages": "/Views/Pages"
+  },
+  "caches": {
+    "local.apcu": {
+      "adapter": "APCu",
+      "class": "\\Spin\\Cache\\Adapters\\Apcu",
+      "options": {}
+    },
+    "remote.redis": {
+      "adapter": "Redis",
+      "class": "\\Spin\\Cache\\Adapters\\Redis",
+      "options": {
+        "host": "172.20.0.1",
+        "port": 6379
+      }
+    }
+  },
+  "factories": {
+    "http": {
+      "serverRequest": {
+        "class": "\\Spin\\Factories\\Http\\ServerRequestFactory",
+        "options": {}
+      },
+      "request": {
+        "class": "\\Spin\\Factories\\Http\\RequestFactory",
+        "options": {}
+      },
+      "response": {
+        "class": "\\Spin\\Factories\\Http\\ResponseFactory",
+        "options": {}
+      },
+      "stream": {
+        "class": "\\Spin\\Factories\\Http\\StreamFactory",
+        "options": {}
+      },
+      "uploadedFile": {
+        "class": "\\Spin\\Factories\\Http\\UploadedFileFactory",
+        "options": {}
+      },
+      "uri": {
+        "class": "\\Spin\\Factories\\Http\\UriFactory",
+        "options": {}
+      }
+    },
+    "container": {
+      "class": "\\Spin\\Factories\\ContainerFactory",
+      "options": {
+        "autowire": true
+      }
+    },
+    "event": {
+      "class": "\\Spin\\Factories\\EventFactory",
+      "options": {}
+    }
+  },
+  "hooks": [
+    {
+      "OnBeforeRequest": [
+        "\\App\\Hooks\\OnBeforeRequest"
+      ],
+      "OnAfterRequest": [
+        "\\App\\Hooks\\OnAfterRequest"
+      ]
+    }
+  ],
+  "connections": {
+    "example_mysql": {
+      "type": "Pdo",
+      "driver": "mysql",
+      "schema": "<db_schema_name>",
+      "host": "localhost",
+      "port": 3306,
+      "username": "root",
+      "password": "*****",
+      "charset": "UTF8",
+      "options": [
+        {
+          "ATTR_PERSISTENT": true
+        },
+        {
+          "ATTR_ERRMODE": "ERRMODE_EXCEPTION"
+        },
+        {
+          "ATTR_AUTOCOMMIT": false
+        }
+      ]
+    },
+    "example_firebird": {
+      "type": "Pdo",
+      "driver": "firebird",
+      "schema": "<path_to_db>",
+      "host": "localhost",
+      "port": 3050,
+      "username": "sysdba",
+      "password": "********",
+      "charset": "UTF8",
+      "options": [
+        {
+          "ATTR_PERSISTENT": true
+        },
+        {
+          "ATTR_ERRMODE": "ERRMODE_EXCEPTION"
+        },
+        {
+          "ATTR_AUTOCOMMIT": false
+        }
+      ]
+    },
+    "example_sqlite": {
+      "type": "Pdo",
+      "driver": "SqlLite",
+      "filename": "storage\\database\\db.sqlite"
+    }
+  }
 }
