@@ -2,7 +2,7 @@
 
 namespace App\Hooks;
 
-use \Spin\Core\Hooks;
+use \Spin\Core\Hook;
 
 class MyHook extends Hook
 {

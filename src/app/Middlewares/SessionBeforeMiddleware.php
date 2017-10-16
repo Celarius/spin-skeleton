@@ -21,7 +21,7 @@ class SessionBeforeMiddleware extends Middleware
     $session['timeout'] = config('session.timeout');
     $session['refresh'] = config('session.refresh');
     if (!empty($session['cookie'])) {
-      $session['value'] = cookieParam( $session['cookie'] );
+      $session['value'] = cookie( $session['cookie'] );
     } else {
       $session['value'] = '';
     }

@@ -53,5 +53,9 @@
       ],
       "after": []
     }
-  ]
+  ],
+  "errors": {
+    "4xx": "\\App\\Controllers\\Error4xxController",
+    "5xx": "\\App\\Controllers\\Error5xxController"
+  }
 }

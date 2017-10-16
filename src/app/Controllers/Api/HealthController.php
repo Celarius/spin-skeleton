@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Api;
 
-use \App\Controllers\AbstractRESTController;
+use \App\Controllers\Api\AbstractRESTController;
 
 class HealthController extends AbstractRESTController
 {
