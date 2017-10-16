@@ -11,13 +11,13 @@
   },
   "groups": [
     {
-      "name": "unversioned",
+      "name": "unversioned api endpoints",
       "notes": "",
       "prefix": "/api",
       "before": [],
       "routes": [
         { "methods":[],       "path":"/health",           "handler":"\\App\\Controllers\\Api\\HealthController" },
-        { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\StatusController" }
+        { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\Api\\StatusController" }
       ],
       "after": []
     },
