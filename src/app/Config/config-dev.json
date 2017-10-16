@@ -20,7 +20,7 @@
     }
   },
   "logger": {
-    "level": "error",
+    "level": "notice",
     "driver": "php",
     "drivers": {
       "php": {

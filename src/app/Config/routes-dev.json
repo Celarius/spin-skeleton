@@ -17,7 +17,11 @@
       "before": [],
       "routes": [
         { "methods":[],       "path":"/health",           "handler":"\\App\\Controllers\\Api\\HealthController" },
+<<<<<<< HEAD
         { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\Api\\StatusController" }
+=======
+        { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\StatusController" }
+>>>>>>> 2dc153e6b08767460982e67f04e9fd61746f093a
       ],
       "after": []
     },
