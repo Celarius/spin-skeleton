@@ -29,7 +29,7 @@ class AuthHttpBeforeMiddleware extends Middleware
   public function initialize(array $args)
   {
     # Get applications global secret
-    $this->secret = config()->get('application.secret');
+    $this->secret = config('application.secret');
 
     return true;
   }
