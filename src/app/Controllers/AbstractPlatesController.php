@@ -29,7 +29,7 @@ abstract class AbstractPlatesController extends Controller
     parent::initialize($args);
 
     # Create new Plates instance, default to "/Views" folder
-    $this->engine = new \League\Plates\Engine app()->getAppPath().DIRECTORY_SEPARATOR.'Views');
+    $this->engine = new \League\Plates\Engine(app()->getAppPath().DIRECTORY_SEPARATOR.'Views');
 
     # Sets the default file extension (from config)
     $this->engine->setFileExtension(config('templates.extension') ?? 'html');
