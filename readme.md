@@ -68,25 +68,25 @@ In order to run the skeleton an Apache VHost needs to be configured:
 
 ## 3.2. .htaccess file
 ```txt
-  SetEnv ENVIRONMENT DEV
+SetEnv ENVIRONMENT DEV
 
-  <IfModule mod_negotiation.c>
-      Options -MultiViews
-  </IfModule>
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
 
-  DirectoryIndex bootstrap.php index.php index.html
+DirectoryIndex bootstrap.php index.php index.html
 
-  Options -Indexes +FollowSymLinks
-  AllowOverride All
-  Order allow,deny
-  Allow from all
-  Require all granted
+Options -Indexes +FollowSymLinks
+AllowOverride All
+Order allow,deny
+Allow from all
+Require all granted
 
-  DirectorySlash Off
+DirectorySlash Off
 
-  # Rewrite Engine to direct all requests to Spin bootstrap.php file
-  RewriteEngine On
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^ bootstrap.php [QSA,L]
+# Rewrite Engine to direct all requests to Spin bootstrap.php file
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ bootstrap.php [QSA,L]
 ```
