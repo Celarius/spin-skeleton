@@ -1,4 +1,16 @@
-# Spin - Skeleton application example
+<!-- https://github.com/naokazuterada/MarkdownTOC -->
+
+<!-- MarkdownTOC list_bullets=" " bracket="round" lowercase="true" autolink="true" indent="  " -->
+
+  [Skeleton application example](#skeleton-application-example)
+  [Technical details](#technical-details)
+  [Apache](#apache)
+    [VHost config](#vhost-config)
+    [.htaccess file](#htaccess-file)
+
+<!-- /MarkdownTOC -->
+
+# Skeleton application example
 
 [Spin framework](https://github.com/Celarius/spin-framework) application example
 
@@ -8,8 +20,12 @@ Uses the following implementations and Factories:
 * Monolog for Logging
 * APCu for SimpleCache
 
-# Apache VHost config
+# Technical details
+* [Request lifecycle](doc/request_lifecycle.md)
+* [Template Engines](doc/template_engines.md)
 
+# Apache
+## VHost config
 In order to run the skeleton an Apache VHost needs to be configured:
 
 ```txt
@@ -48,4 +64,29 @@ In order to run the skeleton an Apache VHost needs to be configured:
   </Directory>
 
 </VirtualHost>
+```
+
+## .htaccess file
+```txt
+  SetEnv ENVIRONMENT DEV
+
+  <IfModule mod_negotiation.c>
+      Options -MultiViews
+  </IfModule>
+
+  DirectoryIndex bootstrap.php index.php index.html
+
+  Options -Indexes +FollowSymLinks
+  AllowOverride All
+  Order allow,deny
+  Allow from all
+  Require all granted
+
+  DirectorySlash Off
+
+  # Rewrite Engine to direct all requests to Spin bootstrap.php file
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ bootstrap.php [QSA,L]
 ```
