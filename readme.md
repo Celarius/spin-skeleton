@@ -18,10 +18,12 @@
 ## 1.1. Installation
 To use the skeleton, simply clone the repository, run a composer update and you are ready to start making your own project.
 
-Cloning the repository:
+Cloning the repository (and init a new git repo for it):
 ```bash
 > git clone https://github.com/Celarius/spin-skeleton.git
 > cd spin-skeleton
+> rmdir .git
+> git init
 > composer update -o --no-dev
 ```
 
