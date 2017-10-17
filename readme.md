@@ -21,10 +21,7 @@ To use the skeleton, simply clone the repository, run a composer update and you 
 Cloning the repository:
 ```bash
 > git clone https://github.com/Celarius/spin-skeleton.git
-```
-
-Composer update:
-```bash
+> cd spin-skeleton
 > composer update -o --no-dev
 ```
 
