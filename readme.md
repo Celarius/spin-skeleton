@@ -1,12 +1,12 @@
 <!-- https://github.com/naokazuterada/MarkdownTOC -->
 
-<!-- MarkdownTOC list_bullets=" " bracket="round" lowercase="true" autolink="true" indent="  " -->
+<!-- MarkdownTOC list_bullets="-" bracket="round" lowercase="true" autolink="true" indent="  " -->
 
-  [Skeleton application example](#skeleton-application-example)
-  [Technical details](#technical-details)
-  [Apache](#apache)
-    [VHost config](#vhost-config)
-    [.htaccess file](#htaccess-file)
+- [Skeleton application example](#skeleton-application-example)
+- [Technical details](#technical-details)
+- [Apache](#apache)
+  - [VHost config](#vhost-config)
+  - [.htaccess file](#htaccess-file)
 
 <!-- /MarkdownTOC -->
 
