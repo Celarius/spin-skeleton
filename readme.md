@@ -3,6 +3,8 @@
 <!-- MarkdownTOC list_bullets="-" bracket="round" lowercase="true" autolink="true" indent="  " -->
 
 - [1. Skeleton application example](#1-skeleton-application-example)
+  - [1.1. Installation](#11-installation)
+  - [1.2. Packages / Components](#12-packages--components)
 - [2. Technical details](#2-technical-details)
 - [3. Apache](#3-apache)
   - [3.1. VHost config](#31-vhost-config)
@@ -11,13 +13,28 @@
 <!-- /MarkdownTOC -->
 
 # 1. Skeleton application example
-
 [Spin framework](https://github.com/Celarius/spin-framework) application example
 
+## 1.1. Installation
+To use the skeleton, simply clone the repository, run a composer update and you are ready to start making your own project.
+
+Cloning the repository:
+```bash
+> git clone https://github.com/Celarius/spin-skeleton.git
+```
+
+Composer update:
+```bash
+> composer update -o --no-dev
+```
+
+## 1.2. Packages / Components
 Uses the following implementations and Factories:
-* Guzzle for HTTP Factories
-* Plates for Template engine (via /App/Controllers/AbstractController.php)
-* Monolog for Logging
+* [Guzzle](https://github.com/guzzle/guzzle) for HTTP Factories
+* Template Engine samples
+  - [Plates](http://platesphp.com/)
+  - [Twig](http://platesphp.com/)
+* [Monolog](https://github.com/Seldaek/monolog) for Logging
 * APCu for SimpleCache
 
 # 2. Technical details
