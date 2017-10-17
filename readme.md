@@ -2,15 +2,15 @@
 
 <!-- MarkdownTOC list_bullets="-" bracket="round" lowercase="true" autolink="true" indent="  " -->
 
-- [Skeleton application example](#skeleton-application-example)
-- [Technical details](#technical-details)
-- [Apache](#apache)
-  - [VHost config](#vhost-config)
-  - [.htaccess file](#htaccess-file)
+- [1. Skeleton application example](#1-skeleton-application-example)
+- [2. Technical details](#2-technical-details)
+- [3. Apache](#3-apache)
+  - [3.1. VHost config](#31-vhost-config)
+  - [3.2. .htaccess file](#32-htaccess-file)
 
 <!-- /MarkdownTOC -->
 
-# Skeleton application example
+# 1. Skeleton application example
 
 [Spin framework](https://github.com/Celarius/spin-framework) application example
 
@@ -20,12 +20,12 @@ Uses the following implementations and Factories:
 * Monolog for Logging
 * APCu for SimpleCache
 
-# Technical details
+# 2. Technical details
 * [Request lifecycle](doc/request_lifecycle.md)
 * [Template Engines](doc/template_engines.md)
 
-# Apache
-## VHost config
+# 3. Apache
+## 3.1. VHost config
 In order to run the skeleton an Apache VHost needs to be configured:
 
 ```txt
@@ -66,7 +66,7 @@ In order to run the skeleton an Apache VHost needs to be configured:
 </VirtualHost>
 ```
 
-## .htaccess file
+## 3.2. .htaccess file
 ```txt
   SetEnv ENVIRONMENT DEV
 
