@@ -14,7 +14,7 @@ class IndexController extends AbstractPlatesController
   public function handleGET(array $args)
   {
     # Model to send to view
-    $model = ['title'=>'PageTitle', 'user'=>'Kim'];
+    $model = ['title'=>'PageTitle', 'user'=>'Maria'];
 
     # Render view
     $html = $this->engine->render('pages::index', $model);
