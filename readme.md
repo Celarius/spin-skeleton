@@ -6,9 +6,10 @@
   - [1.1. Installation](#11-installation)
   - [1.2. Packages / Components](#12-packages--components)
 - [2. Technical details](#2-technical-details)
-- [3. Apache](#3-apache)
-  - [3.1. VHost config](#31-vhost-config)
-  - [3.2. .htaccess file](#32-htaccess-file)
+- [3. Installation](#3-installation)
+  - [3.1. Apache VHost config](#31-apache-vhost-config)
+  - [3.2. Apache .htaccess file](#32-apache-htaccess-file)
+- [4. Folder structure](#4-folder-structure)
 
 <!-- /MarkdownTOC -->
 
@@ -40,8 +41,8 @@ Uses the following implementations and Factories:
 * [Request lifecycle](doc/request_lifecycle.md)
 * [Template Engines](doc/template_engines.md)
 
-# 3. Apache
-## 3.1. VHost config
+# 3. Installation
+## 3.1. Apache VHost config
 In order to run the skeleton an Apache VHost needs to be configured:
 
 ```txt
@@ -82,7 +83,7 @@ In order to run the skeleton an Apache VHost needs to be configured:
 </VirtualHost>
 ```
 
-## 3.2. .htaccess file
+## 3.2. Apache .htaccess file
 ```txt
 SetEnv ENVIRONMENT DEV
 
@@ -105,4 +106,28 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ bootstrap.php [QSA,L]
+```
+
+# 4. Folder structure
+```txt
+/<AppName>
+  /src
+    /app
+      /Config
+      /Middlewares
+      /Controllers
+      /Views
+        /Templates
+        /Errors
+        /Pages
+      /Models
+      globals.php
+    /public
+    /storage
+      /logs
+      /cache
+    /vendor
+      /celarius/spin-framework
+    composer.json
+  /tests
 ```
