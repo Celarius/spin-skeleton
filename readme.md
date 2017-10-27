@@ -14,7 +14,7 @@
 <!-- /MarkdownTOC -->
 
 # 1. Skeleton application example
-[Spin framework](https://github.com/Celarius/spin-framework) application example
+[Spin framework](https://github.com/Celarius/spin-framework) application example.
 
 ## 1.1. Installation
 To use the skeleton, simply clone the repository, run a composer update and you are ready to start making your own project.
