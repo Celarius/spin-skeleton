@@ -63,23 +63,26 @@ In order to run the skeleton an Apache VHost needs to be configured:
         Options -MultiViews
     </IfModule>
 
-    DirectoryIndex bootstrap.php index.php index.html
-
     Options -Indexes +FollowSymLinks
     AllowOverride All
     Order allow,deny
     Allow from all
     Require all granted
+  
+    # Load files in this order on "/"
+    DirectoryIndex bootstrap.php index.php index.html
 
+    # Disable appending a "/" and 301 redirection when a directory
+    # matches the requested URL
     DirectorySlash Off
 
-    # Rewrite Engine to direct all requests to Spin bootstrap.php file
+    # Set Rewrite Engine ON to direct all requests to
+    # the `bootstrap.php` file
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ bootstrap.php [QSA,L]
   </Directory>
-
 </VirtualHost>
 ```
 
