@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use Spin\Core\Middleware;
 
 class RequestIdBeforeMiddleware extends Middleware
 {
@@ -16,7 +16,7 @@ class RequestIdBeforeMiddleware extends Middleware
   function handle(array $args): bool
   {
     # Set requestId
-    container('requestId', md5(microtime(true)));
+    container('requestId', md5((string)microtime(true)));
 
     return true;
   }

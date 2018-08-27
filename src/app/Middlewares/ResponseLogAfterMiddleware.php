@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use Spin\Core\Middleware;
 
 class ResponseLogAfterMiddleware extends Middleware
 {
@@ -22,8 +22,8 @@ class ResponseLogAfterMiddleware extends Middleware
 
     # Log the request
     logger()->info(
-      '"'.getRequest()->getMethod().' '.getRequest()->getUri().'" '.number_format($time,3,'.',''),
-      [container('requestId')]
+      getClientIp().' '.getRequest()->getMethod().' '.getRequest()->getUri(),
+      ['time'=>number_format($time,3,'.',''),'rid'=>container('requestId')]
     );
 
     return true;

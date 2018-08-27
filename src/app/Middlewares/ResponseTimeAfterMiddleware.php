@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use Spin\Core\Middleware;
 
 class ResponseTimeAfterMiddleware extends Middleware
 {
@@ -21,7 +21,7 @@ class ResponseTimeAfterMiddleware extends Middleware
     if ( app('environment') !== 'prod') {
       $response = getResponse()
                   ->withHeader('X-Response-Time', number_format($responseTime,3,'.','') )
-                  ->withHeader('X-Response-Size', number_format($responseSize,0,'.','') )
+                  // ->withHeader('X-Response-Size', number_format($responseSize,0,'.','') )
                   ->withHeader('X-Response-Host', gethostname() . '/' . gethostbyname(gethostname()) )
                   ;
 

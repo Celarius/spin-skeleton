@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use Spin\Core\Middleware;
 
 class RequestIdAfterMiddleware extends Middleware
 {
@@ -18,7 +18,7 @@ class RequestIdAfterMiddleware extends Middleware
    *
    * @return bool                   True=OK, False=Failed to initialize
    */
-  public function initialize(array $args)
+  public function initialize(array $args): bool
   {
     # Get the requestId
     $this->requestId = container('requestId');

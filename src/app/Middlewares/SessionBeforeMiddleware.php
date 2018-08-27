@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use Spin\Core\Middleware;
 
 class SessionBeforeMiddleware extends Middleware
 {
