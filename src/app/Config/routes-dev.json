@@ -1,7 +1,6 @@
 {
   "common": {
     "before": [
-      "\\App\\Middlewares\\CorsBeforeMiddleware"
     ],
     "after": [
       "\\App\\Middlewares\\RequestIdAfterMiddleware",
