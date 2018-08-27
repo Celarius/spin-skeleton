@@ -11,7 +11,7 @@ namespace App\Controllers;
 
 use \Spin\Core\Controller;
 
-abstract class AbstractRESTController extends Controller
+abstract class AbstractRestController extends Controller
 {
   /**
    * Initialization method
