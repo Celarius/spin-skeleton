@@ -16,8 +16,9 @@
       "prefix": "/api",
       "before": [],
       "routes": [
-        { "methods":[],       "path":"/health",           "handler":"\\App\\Controllers\\Api\\HealthController" },
-        { "methods":[],       "path":"/status",           "handler":"\\App\\Controllers\\Api\\StatusController" }
+        { "methods":["GET"],     "path":"/health",           "handler":"\\App\\Controllers\\Api\\HealthController" },
+        { "methods":["GET"],     "path":"/status",           "handler":"\\App\\Controllers\\Api\\StatusController" },
+        { "methods":["GET"],     "path":"/info",             "handler":"\\App\\Controllers\\Api\\InfoController" }
       ],
       "after": []
     },
