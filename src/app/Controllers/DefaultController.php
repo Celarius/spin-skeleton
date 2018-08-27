@@ -14,7 +14,7 @@ class DefaultController extends AbstractPlatesController
    */
   public function handleGET(array $args)
   {
-    $data[] = ['title'=>'PageTitle','user'=>'Kim'];
+    $data[] = ['title'=>'PageTitle','user'=>'Admin'];
 
     $html = $this->engine->render('index', $data); // loads "/Views/Templates/TheFileName.html"
 
