@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Api;
 
-use \App\Controllers\Api\AbstractRESTController;
+use \App\Controllers\AbstractRestController;
 
-class InfoController extends AbstractRESTController
+class InfoController extends AbstractRestController
 {
   /**
    * Handle GET request
