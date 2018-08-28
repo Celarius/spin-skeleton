@@ -1,8 +1,5 @@
 {
   "application": {
-    "code": "spin-skeleton",
-    "name": "spin-skeleton",
-    "version": "1.0.0",
     "global": {
       "maintenance": false,
       "message": "We are in maintenance mode, back shortly",
