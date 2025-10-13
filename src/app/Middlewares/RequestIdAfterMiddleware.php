@@ -6,7 +6,8 @@ use Spin\Core\Middleware;
 
 class RequestIdAfterMiddleware extends Middleware
 {
-  protected $requestId;
+  /** @var string */
+  protected string $requestId;
 
   /**
    * Initialization method
@@ -36,7 +37,7 @@ class RequestIdAfterMiddleware extends Middleware
   {
     # Add "X-Request-Id" Header
     $response = getResponse()
-                ->withHeader('X-Request-Id', $this->requestId);
+                ->withHeader('X-Request-Id', (string) $this->requestId);
 
     # Set the response
     app()->setResponse($response);
