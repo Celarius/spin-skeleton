@@ -36,6 +36,40 @@ php -S localhost:8000 -t src/public
 ```
 
 ## Examples & quick templates
+- Method dockblocks:
+```php
+    /**
+     * [description of method]
+     *
+     * [additional, optiional details]
+     *
+     * @param <type> <name> <description>
+     *
+     * @return <type> <description>
+     *
+     * @throws <ExceptionType> <description>
+     */
+    public function functionName($params)
+    {
+    }
+```
+
+For arrays add the <mixed> by default, unless it is known what type of array it is:
+```php
+    /**
+     * @param array<mixed> $args Description
+     */
+```
+
+- Property docblocks:
+```php
+    /**
+     * <description of property>
+     * @var <type>
+     */
+    private <type> $propertyName;
+```
+
 - Middleware skeleton:
 ```php
 <?php declare(strict_types=1);
@@ -77,6 +111,13 @@ class AuthHttpBeforeMiddleware extends Middleware
   ]
 }
 ```
+## Standards
+- Follow the PSR-12 coding standard for PHP code.
+- Use strict types (`declare(strict_types=1);`) in all PHP files.
+- Follow PSR standards where possible
+- Follow SOLID principles for class design.
+- Use dependency injection for class dependencies where applicable.
+- Use type hints and return types for all functions and methods.
 
 ## Patterns and anti-patterns (skeleton-specific)
 - Use the framework helpers (`config()`, `response()`, `responseJson()`, `getRequest()`) rather than direct PSR-7 instantiation inside app controllers — the skeleton expects these helpers.

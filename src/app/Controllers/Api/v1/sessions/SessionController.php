@@ -3,16 +3,37 @@
 /**
  * Session API Controller
  *
- * Handles session creation, verification and termination
+ * Sessions are based on session-cookies
+ * Handles session fetching, creation and termination
  */
 
-namespace App\Controllers\Api;
+namespace App\Controllers\Api\V1\Sessions;
 
 use \GuzzleHttp\Psr7\Response;
 use \App\Controllers\AbstractRestController;
+use \App\Classes\Managers\SessionManager;
 
 class SessionController extends AbstractRestController
 {
+  /**
+   * Request body
+   * @var array<mixed>
+   */
+  public array $body = [];
+
+  /**
+   * Session Manager
+   * @var SessionManager
+   */
+  private SessionManager $sessionManager;
+
+#############################################################################################
+
+  public function __construct()
+  {
+    $this->sessionManager = new SessionManager();
+  }
+
   /**
    * Handle GET request
    *
@@ -22,82 +43,152 @@ class SessionController extends AbstractRestController
    */
   public function handleGET(array $args)
   {
-    $result = []; // Placeholder for session data
+    try {
+      $sessionid = \cookieParam(\config('session.cookie'));
+      $session = $this->sessionManager->fetchSession($sessionid);
 
-    return responseJson($result,501);
+      if ($session) {
+        return responseJson($session);
+      }
+
+    } catch (\Exception $e) {
+
+      \logger()->critical('Internal exception', [
+        'error' => $e->getMessage(),
+        'rid'   => \container('requestId'),
+        'trace' => $e->getTraceAsString()
+      ]);
+
+      return responseJson(['error' => $e->getMessage()], 500);
+    }
+
+    return response('',404);
+  }
+
+
+  /**
+   * Verify POST request & paramters
+   *
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return  Response|null                       Response on error, null if OK
+   */
+  public function verifyPOST(array $args): ?Response
+  {
+    # Validate "Content-type"
+    if (!\preg_match('/application\/json/i',(\getRequest()->getHeader('Content-Type')[0] ?? ''))) {
+      return \responseJsonError('Bad request','Content-Type must be "application/json"',400);
+    }
+
+    # Decode payload
+    $this->body = (\json_decode(\getRequest()->getBody()->getContents(),true) ?? []);
+    if (empty($this->body)) {
+      return \responseJsonError('Bad request','Invalid post body', 400);
+    }
+
+    # If username&password are missing return error
+    if (empty($this->body['username']) || empty($this->body['password'])) {
+      return \responseJsonError('Bad request','Missing {username}/{password} parameters',400);
+    }
+
+    return null;
   }
 
   /**
-   * Handle POST request - Create a new session (login)
+   * Create a new session (login)
    *
-   * Implementation notes / TODOs:
-   *  - Parse the request body (JSON) to extract credentials (e.g. username/email and password)
-   *    // Example: $payload = json_decode(file_get_contents('php://input'), true);
-   *  - Validate required fields and return 422 with validation errors if missing/invalid.
-   *  - Optionally run rate-limiting, captcha or lockout checks here before attempting auth.
-   *  - Call the sessions backend (use `App\Clients\Sessions\Client`) to create a session.
-   *    // Example (pseudo):
-   *    // $token = config('integrations.core.token');
-   *    // $sessions = new \App\Clients\Sessions\Client();
-   *    // $resp = $sessions->CreateSession($payload, $token);
-   *  - Inspect the backend response: if successful it should return at least a `sessionid` and
-   *    optionally an `expires_dt`.
-   *  - On success:
-   *    - Set a cookie named `config('session.cookie')` with the `sessionid` value.
-   *      Include secure attributes: `HttpOnly`, `Secure` (when serving TLS), and `SameSite`.
-   *      Use the `expires_dt` to set cookie expiration if provided.
-   *      // Example (pseudo): setcookie($name, $value, $expire_ts, '/', '', $isTls, true);
-   *    - Return `responseJson(['sessionid' => $id, 'expires_dt' => $expires], 201)`
-   *  - On auth failure return `responseJson(['error' => 'Unauthorized'], 401)`.
-   *  - On other backend errors return 500 and log details with `logger()`.
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
    *
-   * Notes:
-   *  - Respect `config('session.cookie')` for cookie name and any session config (expires, path)
-   *  - Consider returning a minimal user object in the response if appropriate.
-   *
-   * @param array<mixed> $args
-   * @return Response
+   * @return  Response|null                       Response on error, null if OK
    */
   public function handlePOST(array $args)
   {
-    // TODO: Implement parsing of request body and validation
-    // TODO: Use App\Clients\Sessions\Client to call core session-create endpoint
-    // TODO: Set session cookie with proper attributes and expiration
-    // TODO: Return 201 with session metadata on success, 401 on auth failure, 422 for validation
+    try {
+      $r = $this->verifyPOST($args);
+      if ($r) return $r;
 
-    return responseJson(['error' => 'Not implemented'], 501);
+      $username = trim((string)($this->body['username'] ?? ''));
+      $password = trim((string)($this->body['password'] ?? ''));
+
+      # Authenticate credentials
+      $account = $this->sessionManager->authenticate($username, $password);
+
+      if ($account) {
+        // Correct credentials, create a session
+        $session = $this->sessionManager->createSession([
+          'account_uuid' => $account['uuid']
+        ]);
+      }
+
+      if ($session) {
+          # Set Session Cookie to return
+          \cookie(
+            \config('session.cookie'),                                // Name
+            $session['sessionid'],                                    // Value
+            (new \DateTime($session['expires_dt']))->getTimestamp(),  // Expire time as unix timestamp
+            '/',                                                      // Path
+            '',                                                       // Domain
+            false,                                                    // Secure
+            true                                                      // HttpOnly (true => only browser sees this)
+          );
+
+          return responseJson($session);
+      }
+
+    } catch (\Exception $e) {
+
+      \logger()->critical('Internal exception', [
+        'error' => $e->getMessage(),
+        'rid'   => \container('requestId'),
+        'trace' => $e->getTraceAsString()
+      ]);
+
+      return responseJson(['error' => $e->getMessage()], 500);
+    }
+
+    return responseJson(['error' => 'Invalid username or password'], 401);
   }
 
   /**
-   * Handle DELETE request - Terminate a session (logout)
+   * Terminate a session (logout)
    *
-   * Implementation notes / TODOs:
-   *  - Retrieve session id from cookie named `config('session.cookie')` or from an
-   *    Authorization header if your API supports it.
-   *    // Example: $sessionId = cookieParam(config('session.cookie'));
-   *  - If no session id is present return `responseJson(['error' => 'Not authenticated'], 401)`
-   *  - Call the sessions backend to delete/terminate the session using `App\Clients\Sessions\Client`.
-   *    // Example (pseudo): $resp = $sessions->DeleteSession($sessionId, $token);
-   *  - If the backend confirms deletion return 204 (No Content) or 200 with a message.
-   *  - Clear the session cookie locally by setting it with a past expiration date.
-   *    // Example: setcookie($name, '', time()-3600, '/', '', $isTls, true);
-   *  - If the session was not found return 404.
-   *  - On backend errors return 500 and log details with `logger()`.
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
    *
-   * Security notes:
-   *  - Use HttpOnly and Secure cookie flags when clearing the cookie as well.
-   *  - Verify CSRF protections for logout if needed (depending on how frontend triggers logout).
-   *
-   * @param array<mixed> $args
-   * @return Response
+   * @return  Response|null                       Response on error, null if OK
    */
   public function handleDELETE(array $args)
   {
-    // TODO: Read session id from cookie or Authorization header
-    // TODO: Call App\Clients\Sessions\Client to terminate the session in the core
-    // TODO: Clear cookie and return 204 on success, 404 if not found
+    try {
+      # Always clear session cookie
+      \cookie(
+        \config('session.cookie'),
+        '',
+        0,
+        '/',
+        '',
+        false,
+        true
+      );
 
-    return responseJson(['error' => 'Not implemented'], 501);
+      $sessionid = \cookieParam(\config('session.cookie'));
+      $session = $this->sessionManager->fetchSession($sessionid);
+      if ($session) {
+        $this->sessionManager->deleteSession($session);
+      }
+
+    } catch (\Exception $e) {
+
+      \logger()->critical('Internal exception', [
+        'error' => $e->getMessage(),
+        'rid'   => \container('requestId'),
+        'trace' => $e->getTraceAsString()
+      ]);
+
+      return responseJson(['error' => $e->getMessage()], 500);
+    }
+
+    # Always return 204 No Content even if session was not found
+    return response('', 204);
   }
 
 }
