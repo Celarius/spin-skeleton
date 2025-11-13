@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use \GuzzleHttp\Psr7\Response;
 use \App\Controllers\AbstractPlatesController;
 
 class ExampleController extends AbstractPlatesController
@@ -9,8 +10,9 @@ class ExampleController extends AbstractPlatesController
   /**
    * Handle GET request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handleGET(array $args)
   {
@@ -21,15 +23,16 @@ class ExampleController extends AbstractPlatesController
       '</body>'.
       '</html>';
 
-    # Send the generated page
     return response($html,200);
   }
+
 
   /**
    * Handle POST request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handlePOST(array $args)
   {
@@ -40,11 +43,13 @@ class ExampleController extends AbstractPlatesController
     return response($this->engine->render('errors::405'), 405);
   }
 
+
   /**
    * Handle PUT request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handlePUT(array $args)
   {
@@ -55,12 +60,14 @@ class ExampleController extends AbstractPlatesController
     return response($this->engine->render('errors::405'), 405);
   }
 
+
   /**
    * Handle PATCH request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
-   */
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
+ */
   public function handlePATCH(array $args)
   {
     # Get a post param
@@ -70,11 +77,13 @@ class ExampleController extends AbstractPlatesController
     return response($this->engine->render('errors::405'), 405);
   }
 
+
   /**
    * Handle DELETE request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handleDELETE(array $args)
   {
@@ -82,11 +91,13 @@ class ExampleController extends AbstractPlatesController
     return response($this->engine->render('errors::405'), 405);
   }
 
+
   /**
    * Handle HEAD request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handleHEAD(array $args)
   {
@@ -94,11 +105,13 @@ class ExampleController extends AbstractPlatesController
     return $this->handleGET($args)->withBody('');
   }
 
+
   /**
    * Handle OPTIONS request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handleOPTIONS(array $args)
   {
@@ -106,11 +119,13 @@ class ExampleController extends AbstractPlatesController
     return response($this->engine->render('errors::405'), 405);
   }
 
+
   /**
    * Handle custom request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handleCUSTOM(array $args)
   {

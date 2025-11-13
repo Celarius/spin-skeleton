@@ -5,7 +5,7 @@
       "message": "We are in maintenance mode, back shortly",
       "timezone": "Europe/Stockholm"
     },
-    "secret": "${application-secret}"
+    "secret": "${env:APPLICATION_SECRET}"
   },
   "session": {
     "cookie": "SID",
@@ -90,25 +90,15 @@
       "options": {}
     }
   },
-  "hooks": [
-    {
-      "OnBeforeRequest": [
-        "\\App\\Hooks\\OnBeforeRequest"
-      ],
-      "OnAfterRequest": [
-        "\\App\\Hooks\\OnAfterRequest"
-      ]
-    }
-  ],
   "connections": {
     "example_mysql": {
       "type": "Pdo",
       "driver": "mysql",
-      "schema": "<db_schema_name>",
-      "host": "localhost",
-      "port": 3306,
-      "username": "root",
-      "password": "*****",
+      "schema": "${env:DB_DATABASE}",
+      "host": "${env:DB_HOST}",
+      "port": "${env:DB_PORT}",
+      "username": "${env:DB_USERNAME}",
+      "password": "${env:DB_PASSWORD}",
       "charset": "UTF8",
       "options": {
         "ATTR_PERSISTENT": false,
@@ -120,11 +110,11 @@
     "example_firebird": {
       "type": "Pdo",
       "driver": "firebird",
-      "schema": "<path_to_db>",
-      "host": "localhost",
-      "port": 3050,
-      "username": "sysdba",
-      "password": "********",
+      "schema": "${env:DB_DATABASE}",
+      "host": "${env:DB_HOST}",
+      "port": "${env:DB_PORT}",
+      "username": "${env:DB_USERNAME}",
+      "password": "${env:DB_PASSWORD}",
       "charset": "UTF8",
       "options": {
         "ATTR_PERSISTENT": true,

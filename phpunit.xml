@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+>
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+    <testsuites>
+        <testsuite name="Spin-skeleton test suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <ini name="date.timezone" value="UTC"/>
+    </php>
+</phpunit>

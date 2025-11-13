@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use \GuzzleHttp\Psr7\Response;
 use \App\Controllers\AbstractPlatesController;
 
 class DefaultController extends AbstractPlatesController
@@ -9,8 +10,9 @@ class DefaultController extends AbstractPlatesController
   /**
    * Handle GET request
    *
-   * @param  array $args    Path variable arguments as name=value pairs
-   * @return bool           Value returned by $app->run()
+   * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return Response                             Response to caller
    */
   public function handleGET(array $args)
   {

@@ -1,4 +1,5 @@
-/src/storage/
+/src/storage/log
+/src/storage/cache
 /vendor/
 /composer.phar
 /composer.lock
