@@ -23,7 +23,7 @@ use Spin\Helpers\JWT;
 
 class AuthHttpBeforeMiddleware extends Middleware
 {
-  /** @var        secret          Secret string */
+  /** @var        string          Secret string */
   protected $secret;
 
   /**
@@ -143,7 +143,7 @@ class AuthHttpBeforeMiddleware extends Middleware
       #
 
       # Verify the Token, and decode the payload - will throw exception on failure
-      $payload = JWT::decode($token, $this->secret, ['HS256']);
+      $payload = JWT::decode($token, $this->secret, 'HS256');
 
       # Check that there is a valid payload, then we are authenticated
       if (!is_null($payload)) {
