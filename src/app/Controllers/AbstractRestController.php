@@ -20,7 +20,7 @@ abstract class AbstractRestController extends Controller
    *
    * @param  array<mixed> $args                   Path variable arguments as name=value pairs
    */
-  public function initialize(array $args)
+  public function initialize(array $args): bool
   {
     parent::initialize($args);
 
