@@ -1,0 +1,24 @@
+{
+  "application": {
+    "global": {
+      "maintenance": false,
+      "timezone": "UTC"
+    },
+    "secret": "test-secret-key-for-unittest-only"
+  },
+  "session": {
+    "cookie": "SID",
+    "timeout": 3600,
+    "refresh": 600
+  },
+  "logger": {
+    "level": "debug",
+    "driver": "php",
+    "drivers": {
+      "php": {
+        "line_format": "[%channel%] [%level_name%] %message% %context%",
+        "line_datetime": "Y-m-d H:i:s.v e"
+      }
+    }
+  }
+}
