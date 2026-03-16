@@ -56,7 +56,7 @@ class CorsBeforeMiddleware extends Middleware
    *
    * @return     bool   True=OK, False=Failed to handle it
    */
-  function handle(array $args): bool
+  public function handle(array $args): bool
   {
     # Is this a CORS headers enabled request at all?
     if (empty($this->origin) && empty($this->method)) {
