@@ -3,6 +3,7 @@
 namespace App\Controllers\Api;
 
 use \GuzzleHttp\Psr7\Response;
+use \Psr\Http\Message\ResponseInterface;
 use \App\Controllers\AbstractRestController;
 
 class StatusController extends AbstractRestController
@@ -14,7 +15,7 @@ class StatusController extends AbstractRestController
    *
    * @return Response                             Response to caller
    */
-  public function handleGET(array $args)
+  public function handleGET(array $args): ResponseInterface
   {
     $data = [];
     $data['status'] = 'OK';
