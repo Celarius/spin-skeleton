@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \GuzzleHttp\Psr7\Response;
+use \Psr\Http\Message\ResponseInterface;
 use \App\Controllers\AbstractPlatesController;
 
 class DefaultController extends AbstractPlatesController
@@ -14,7 +15,7 @@ class DefaultController extends AbstractPlatesController
    *
    * @return Response                             Response to caller
    */
-  public function handleGET(array $args)
+  public function handleGET(array $args): ResponseInterface
   {
     $data[] = ['title'=>'PageTitle','user'=>'Admin'];
 
