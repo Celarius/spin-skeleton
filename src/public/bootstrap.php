@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Spin Application bootstrap file
  *
@@ -46,7 +46,7 @@
     $msg[] = '...heaven, I\'m in heaven ...  - The Green Mile (1999)';
 
     # Create response
-    responseJson(['message'=>$msg[mt_rand(0,count($msg)-1)],'details'=>''] );
+    responseJson(['message'=>$msg[mt_rand(0,count($msg)-1)],'details'=>''], 500);
 
   } finally {
     # Send response back to client

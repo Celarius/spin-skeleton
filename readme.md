@@ -1,136 +1,246 @@
-<!-- https://github.com/naokazuterada/MarkdownTOC -->
+# Spin Skeleton
 
-<!-- MarkdownTOC list_bullets="-" bracket="round" lowercase="true" autolink="true" indent="  " -->
+A lightweight, modern PHP 8+ web framework skeleton for building REST APIs and web applications.
 
-- [1. Skeleton application example](#1-skeleton-application-example)
-  - [1.1. Installation](#11-installation)
-  - [1.2. Packages / Components](#12-packages--components)
-- [2. Technical details](#2-technical-details)
-- [3. Installation](#3-installation)
-  - [3.1. Apache VHost config](#31-apache-vhost-config)
-  - [3.2. Apache .htaccess file](#32-apache-htaccess-file)
-- [4. Folder structure](#4-folder-structure)
+## Features
 
-<!-- /MarkdownTOC -->
+✓ **Lightweight & Fast** — Minimal overhead, optimized for performance
+✓ **PHP 8+** — Modern PHP with strict typing and attributes
+✓ **REST APIs** — JSON routing and controllers with built-in helpers
+✓ **PSR Compliant** — PSR-3, PSR-7, PSR-11, PSR-16, PSR-17 standards
+✓ **Flexible Configuration** — JSON config with environment variable expansion
+✓ **Database Support** — MySQL, PostgreSQL, SQLite, Firebird, CockroachDB
+✓ **Middleware Pipeline** — Global, group, and route-level middleware
+✓ **Caching** — APCu, Redis, and file-based cache adapters
+✓ **Logging** — Monolog integration with configurable drivers
+✓ **Tested** — PHPUnit test suite included
 
-# 1. Skeleton application example
-[Spin framework](https://github.com/Celarius/spin-framework) application example.
+## Getting Started (5 Minutes)
 
-## 1.1. Installation
-To use the skeleton, simply clone the repository, run a composer update and you are ready to start making your own project.
+### 1. Clone the Repository
 
-Cloning the repository (and init a new git repo for it):
 ```bash
-> git clone https://github.com/Celarius/spin-skeleton.git
-> cd spin-skeleton
-> rmdir .git
-> git init
-> composer update -o --no-dev
+git clone https://github.com/Celarius/spin-skeleton.git myapp
+cd myapp
 ```
 
-## 1.2. Packages / Components
-Uses the following implementations and Factories:
-* [Guzzle](https://github.com/guzzle/guzzle) for HTTP Factories
-* Template Engine samples
-  - [Plates](http://platesphp.com/)
-  - [Twig](http://platesphp.com/)
-* [Monolog](https://github.com/Seldaek/monolog) for Logging
-* APCu for SimpleCache
+### 2. Install Dependencies
 
-# 2. Technical details
-* [Request lifecycle](doc/request_lifecycle.md)
-* [Template Engines](doc/template_engines.md)
+```bash
+composer install
+```
 
-# 3. Installation
-## 3.1. Apache VHost config
-In order to run the skeleton an Apache VHost needs to be configured:
+### 3. Create .env File
 
-```txt
+```bash
+cp .env.example .env
+# Edit .env with your settings
+```
+
+### 4. Run Development Server
+
+```bash
+php -S localhost:8000 -t src/public
+```
+
+### 5. Test the API
+
+```bash
+curl http://localhost:8000/api/health
+```
+
+Expected response:
+```json
+{
+  "status": "OK",
+  "code": "spin",
+  "name": "Spin Skeleton",
+  "version": "0.0.1"
+}
+```
+
+✓ **Done!** Your app is running. Read the documentation to build your first controller.
+
+## Documentation
+
+| Topic | File |
+|-------|------|
+| 5-minute setup guide | [Getting Started](doc/getting-started.md) |
+| Configuration and environment variables | [Configuration](doc/configuration.md) |
+| Database setup and queries (MySQL, SQLite, PostgreSQL) | [Database Connections](doc/database-connections.md) |
+| Creating controllers and middleware | [Controllers & Middleware](doc/controllers-and-middleware.md) |
+| Writing tests with PHPUnit | [Testing](doc/testing.md) |
+
+## Project Structure
+
+```
+spin-skeleton/
+├── src/
+│   ├── app/
+│   │   ├── Config/              # Configuration files (JSON)
+│   │   │   ├── config-dev.json
+│   │   │   ├── config-unittest.json
+│   │   │   └── routes-dev.json
+│   │   ├── Controllers/         # API and web controllers
+│   │   │   ├── Api/
+│   │   │   │   ├── HealthController.php
+│   │   │   │   ├── StatusController.php
+│   │   │   │   └── InfoController.php
+│   │   │   ├── DefaultController.php
+│   │   │   └── ExampleController.php
+│   │   ├── Middlewares/         # Request/response middleware
+│   │   ├── Views/               # Templates and pages
+│   │   │   ├── Pages/
+│   │   │   ├── Errors/
+│   │   │   └── Components/
+│   │   ├── Models/              # (Future) Data models
+│   │   ├── Classes/             # Application classes
+│   │   └── Globals.php          # Global helpers registration
+│   └── public/
+│       ├── bootstrap.php        # Application entry point
+│       ├── index.php
+│       └── .htaccess            # Apache routing
+├── tests/                       # PHPUnit test suite
+│   ├── Controllers/
+│   ├── Middlewares/
+│   ├── ApplicationTest.php
+│   ├── bootstrap.php
+│   └── phpunit.xml
+├── doc/                         # Documentation guides
+│   ├── getting-started.md
+│   ├── configuration.md
+│   ├── database-connections.md
+│   ├── controllers-and-middleware.md
+│   └── testing.md
+├── vendor/                      # Composer dependencies
+├── .env                         # Environment variables (create)
+├── .gitignore
+├── composer.json
+├── composer.lock
+└── phpunit.xml
+```
+
+## Common Tasks
+
+### Create a REST API Endpoint
+
+1. Create a controller in `src/app/Controllers/Api/`
+2. Extend `Spin\Core\Controller`
+3. Implement `handleGET()`, `handlePOST()`, etc.
+4. Register in `src/app/Config/routes-dev.json`
+
+[Full guide →](doc/controllers-and-middleware.md#rest-api-controller-example)
+
+### Connect to Database
+
+1. Configure connection in `config-dev.json`
+2. Set `.env` variables for credentials
+3. Use `app()->getConnection()` in controllers
+
+Supports: MySQL, PostgreSQL, SQLite, Firebird, CockroachDB
+
+[Full guide →](doc/database-connections.md)
+
+### Write Tests
+
+1. Create test file in `tests/`
+2. Extend `PHPUnit\Framework\TestCase`
+3. Use `composer test` to run
+
+[Full guide →](doc/testing.md)
+
+### Configure Application
+
+1. Edit `src/app/Config/config-dev.json`
+2. Use environment variables with `${env:VAR}`
+3. Access with `config('key.path')` helper
+
+[Full guide →](doc/configuration.md)
+
+### Add Middleware
+
+1. Create class extending `Spin\Core\Middleware`
+2. Implement `initialize()` and `handle()` methods
+3. Register in config or routes
+
+[Full guide →](doc/controllers-and-middleware.md#creating-middleware)
+
+## Deployment
+
+### Apache VirtualHost
+
+```apache
 <VirtualHost *:80>
+  ServerName myapp.local
+  DocumentRoot /var/www/myapp/src/public
 
-  ServerName {alias.domain.com}
-  ServerAdmin webmaster@{alias.domain.com}
-
-  DocumentRoot "{path_to_web_apps}\spin-skeleton\src\public"
-
-  ErrorLog "logs/spin.skeleton-error.log"
-  CustomLog "logs/spin.skeleton-access.log" common
-
-  SetEnv ENVIRONMENT DEV
-
-  <Directory "{path_to_web_apps}\spin-skeleton\src\public">
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
-
+  <Directory /var/www/myapp/src/public>
     Options -Indexes +FollowSymLinks
     AllowOverride All
-    Order allow,deny
-    Allow from all
     Require all granted
-  
-    # Load files in this order on "/"
-    DirectoryIndex bootstrap.php index.php index.html
 
-    # Disable appending a "/" and 301 redirection when a directory
-    # matches the requested URL
-    DirectorySlash Off
-
-    # Set Rewrite Engine ON to direct all requests to
-    # the `bootstrap.php` file
     RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ bootstrap.php [QSA,L]
   </Directory>
 </VirtualHost>
 ```
 
-## 3.2. Apache .htaccess file
-```txt
-SetEnv ENVIRONMENT DEV
+### Docker
 
-<IfModule mod_negotiation.c>
-    Options -MultiViews
-</IfModule>
-
-DirectoryIndex bootstrap.php index.php index.html
-
-Options -Indexes +FollowSymLinks
-AllowOverride All
-Order allow,deny
-Allow from all
-Require all granted
-
-DirectorySlash Off
-
-# Rewrite Engine to direct all requests to Spin bootstrap.php file
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ bootstrap.php [QSA,L]
+```dockerfile
+FROM php:8.2-cli
+RUN apt-get update && apt-get install -y git unzip
+RUN curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+WORKDIR /app
+COPY . .
+RUN composer install --optimize-autoloader --no-dev
+EXPOSE 8000
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "src/public"]
 ```
 
-# 4. Folder structure
-```txt
-/<AppName>
-  /src
-    /app
-      /Config
-      /Middlewares
-      /Controllers
-      /Views
-        /Templates
-        /Errors
-        /Pages
-      /Models
-      globals.php
-    /public
-    /storage
-      /logs
-      /cache
-    /vendor
-      /celarius/spin-framework
-    composer.json
-  /tests
+Build and run:
+```bash
+docker build -t spin-skeleton .
+docker run -p 8000:8000 spin-skeleton
 ```
+
+## Dependencies
+
+- **PHP 8.0+**
+- **celarius/spin-framework** — Core framework
+- **league/plates** — Template engine
+- **phpunit/phpunit** — Testing framework (dev)
+
+See `composer.json` for all dependencies.
+
+## Testing
+
+Run the test suite:
+
+```bash
+composer test
+```
+
+With coverage report:
+
+```bash
+./vendor/bin/phpunit --coverage-html coverage/
+```
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details
+
+## Author
+
+Kim Sandell ([sandell@celarius.com](mailto:sandell@celarius.com))
+
+---
+
+**Resources:**
+
+- [Spin Framework](https://github.com/Celarius/spin-framework)
+- [Documentation](doc/)
+- [Getting Started in 5 Minutes](doc/getting-started.md)

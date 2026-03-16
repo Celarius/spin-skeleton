@@ -27,7 +27,7 @@
       "prefix": "/api/v1",
       "before": [],
       "routes": [
-        { "methods":[],    "path":"/sessions",        "handler":"\\App\\Controllers\\Api\\v1\\sessions\\SessionController" }
+        { "methods":[],    "path":"/sessions",        "handler":"\\App\\Controllers\\Api\\V1\\Sessions\\SessionController" }
       ],
       "after": []
     },

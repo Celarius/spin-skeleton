@@ -1,8 +1,8 @@
+/vendor/
 /src/storage/log
 /src/storage/cache
-/vendor/
 /composer.phar
 /composer.lock
+/coverage.cobertura.xml
 desktop.ini
 .phpunit.result.cache
-/coverage.cobertura.xml

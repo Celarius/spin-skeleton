@@ -4,23 +4,21 @@ namespace App\Middlewares;
 
 use \Spin\Core\Middleware;
 
-# Helper
-use \App\Helpers\ClientBrowserInfo;
-
 class ClientInfoBeforeMiddleware extends Middleware
 {
   /**
-   * Let middleware do it's magic
+   * Collect client browser/device information and store it in the container.
    *
-   * @param      array  $args   URI parameters as key=value array
+   * TODO: Implement by parsing request headers (User-Agent, Accept-Language,
+   * etc.) into a structured array or object and storing it via container().
    *
-   * @return     bool   True=OK, False=Failed to handle it
+   * @param  array  $args   URI parameters as key=value array
+   *
+   * @return bool           True=OK, False=Failed to handle it
    */
-  function handle(array $args): bool
+  public function handle(array $args): bool
   {
-    # Set array to container
-    container('clientInfo', new ClientBrowserInfo());
-
+    // TODO: implement client info collection
     return true;
   }
 

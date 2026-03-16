@@ -47,7 +47,7 @@
       "adapter": "Redis",
       "class": "\\Spin\\Cache\\Adapters\\Redis",
       "options": {
-        "host": "172.20.0.1",
+        "host": "${env:REDIS_HOST}",
         "port": 6379
       }
     }
@@ -84,10 +84,6 @@
       "options": {
         "autowire": true
       }
-    },
-    "event": {
-      "class": "\\Spin\\Factories\\EventFactory",
-      "options": {}
     }
   },
   "connections": {
@@ -125,7 +121,7 @@
     "example_sqlite": {
       "type": "Pdo",
       "driver": "SqlLite",
-      "filename": "storage\\database\\db.sqlite"
+      "filename": "storage/database/db.sqlite"
     }
   }
 }

@@ -9,7 +9,7 @@
 
 namespace App\Controllers\Api\V1\Sessions;
 
-use \GuzzleHttp\Psr7\Response;
+use \Psr\Http\Message\ResponseInterface;
 use \App\Controllers\AbstractRestController;
 use \App\Classes\Managers\SessionManager;
 
@@ -41,7 +41,7 @@ class SessionController extends AbstractRestController
    *
    * @return Response                             Response to caller
    */
-  public function handleGET(array $args)
+  public function handleGET(array $args): ResponseInterface
   {
     try {
       $sessionid = \cookieParam(\config('session.cookie'));
@@ -73,7 +73,7 @@ class SessionController extends AbstractRestController
    *
    * @return  Response|null                       Response on error, null if OK
    */
-  public function verifyPOST(array $args): ?Response
+  public function verifyPOST(array $args): ?ResponseInterface
   {
     # Validate "Content-type"
     if (!\preg_match('/application\/json/i',(\getRequest()->getHeader('Content-Type')[0] ?? ''))) {
@@ -101,7 +101,7 @@ class SessionController extends AbstractRestController
    *
    * @return  Response|null                       Response on error, null if OK
    */
-  public function handlePOST(array $args)
+  public function handlePOST(array $args): ResponseInterface
   {
     try {
       $r = $this->verifyPOST($args);
@@ -113,6 +113,7 @@ class SessionController extends AbstractRestController
       # Authenticate credentials
       $account = $this->sessionManager->authenticate($username, $password);
 
+      $session = null;
       if ($account) {
         // Correct credentials, create a session
         $session = $this->sessionManager->createSession([
@@ -156,7 +157,7 @@ class SessionController extends AbstractRestController
    *
    * @return  Response|null                       Response on error, null if OK
    */
-  public function handleDELETE(array $args)
+  public function handleDELETE(array $args): ResponseInterface
   {
     try {
       # Always clear session cookie

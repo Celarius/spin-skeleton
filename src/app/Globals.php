@@ -1,8 +1,5 @@
 <?php declare(strict_types=1);
 
-use \GuzzleHttp\Psr7\Request;
-use \GuzzleHttp\Psr7\Response;
-
 if (!function_exists("responseJsonError")) {
   /**
    * Sends back a JSON error response (for REST API errors)
@@ -19,7 +16,7 @@ if (!function_exists("responseJsonError")) {
    * @param      int       $httpCode  The http code
    * @param      mixed     $code      The application specific error code
    *
-   * @return     Response
+   * @return     \GuzzleHttp\Psr7\Response
    */
   function responseJsonError(string $title,string $message,int $httpCode=400, mixed $code=null)
   {
@@ -39,7 +36,7 @@ if (!function_exists("isWin")) {
    *
    * @return     bool
    */
-  function isWin(): string
+  function isWin(): bool
   {
     return (\strncasecmp(PHP_OS, 'WIN', 3) == 0);
   }
@@ -56,9 +53,9 @@ if (!function_exists("array_change_key_case_recursive")) {
    */
   function array_change_key_case_recursive(array $arr, int|null $case = \CASE_LOWER)
   {
-    return \array_map(function($item){
+    return \array_map(function($item) use ($case) {
       if (is_array($item))
-        $item = \array_change_key_case_recursive($item);
+        $item = \array_change_key_case_recursive($item, $case);
       return $item;
     },\array_change_key_case($arr, $case));
   }
@@ -200,24 +197,6 @@ if(!function_exists('http_build_url'))
   }
 }
 
-if (!function_exists("str_contains")) {
-  /**
-   * Checks if $haystack contains $needle. Case insensitive check
-   *
-   * @param   string  $haystack     Data to search
-   * @param   string  $needle       String to find in $haystack
-   *
-   * @return  boolean
-   */
-  function str_contains(string $haystack, string $needle): bool
-  {
-    if (empty($haystack) || empty($needle)) return false;
-
-    return (\mb_stripos($haystack, $needle) !== false);
-  }
-}
-
-
 if (!function_exists("str_pattern_match")) {
   /**
    * Checks if a $pattern is found in a $haystack
@@ -290,18 +269,3 @@ if (!function_exists("str_pattern_match")) {
   }
 }
 
-if (!function_exists("generateRefId")) {
-  /**
-   * Generates a reference id
-   *
-   * @param   string $prefix            Optional prefix to prepend to result
-   *
-   * @return  string                    13 character reference id. ex. `49p7qs0n3t0ks`
-   */
-  function generateRefId(string $prefix=''): string
-  {
-    $refId = (new \DateTIme('', new \DateTImeZone('UTC')))->format('YmdHisu'); // `u` = Microsecond precision
-
-    return $prefix . \baseConvert($refId, 10, 36);
-  }
-}

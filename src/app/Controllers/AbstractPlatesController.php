@@ -14,8 +14,8 @@ use \Spin\Core\Controller;
 
 abstract class AbstractPlatesController extends Controller
 {
-  /** @var Engine       The Leauge Template Engine */
-  protected $engine;
+  /** @var Engine       The League Template Engine */
+  protected Engine $engine;
 
   /**
    * Initialization method
@@ -24,8 +24,10 @@ abstract class AbstractPlatesController extends Controller
    * before any route specific Middleware handlers
    *
    * @param  array<mixed> $args                   Path variable arguments as name=value pairs
+   *
+   * @return bool
    */
-  public function initialize(array $args)
+  public function initialize(array $args): bool
   {
     parent::initialize($args);
 
@@ -39,7 +41,7 @@ abstract class AbstractPlatesController extends Controller
     $this->engine->addFolder('pages', app()->getAppPath().config('templates.pages'));
     $this->engine->addFolder('errors', app()->getAppPath().config('templates.errors'));
 
-    return ;
+    return true;
   }
 
 }

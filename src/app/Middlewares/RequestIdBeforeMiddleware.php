@@ -13,7 +13,7 @@ class RequestIdBeforeMiddleware extends Middleware
    *
    * @return bool                   True=OK, False=Failed to handle it
    */
-  function handle(array $args): bool
+  public function handle(array $args): bool
   {
     # Set requestId
     container('requestId', md5((string)microtime(true)));
