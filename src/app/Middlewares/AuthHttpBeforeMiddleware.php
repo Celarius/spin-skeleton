@@ -48,7 +48,7 @@ class AuthHttpBeforeMiddleware extends Middleware
    *
    * @return     bool   True=OK, False=Failed to handle it
    */
-  function handle(array $args): bool
+  public function handle(array $args): bool
   {
     # Params
     $authenticated = false;
@@ -75,7 +75,7 @@ class AuthHttpBeforeMiddleware extends Middleware
    *
    * @return     bool    False for NOT authenticated, True for success
    */
-  protected function authBasic(string $username, string $password)
+  protected function authBasic(string $username, string $password): bool
   {
     $authenticated = false;
 
@@ -94,7 +94,7 @@ class AuthHttpBeforeMiddleware extends Middleware
    *
    * @return     bool    False for NOT authenticated, True for success
    */
-  protected function authApikey(string $apikey)
+  protected function authApikey(string $apikey): bool
   {
     $authenticated = false;
 
@@ -113,7 +113,7 @@ class AuthHttpBeforeMiddleware extends Middleware
    *
    * @return     bool    False for NOT authenticated, True for success
    */
-  protected function authToken(string $token)
+  protected function authToken(string $token): bool
   {
     $authenticated = false;
 
@@ -133,7 +133,7 @@ class AuthHttpBeforeMiddleware extends Middleware
    *
    * @return     bool    False for NOT authenticated, True for success
    */
-  protected function authBearer(string $token)
+  protected function authBearer(string $token): bool
   {
     $authenticated = false;
 
