@@ -5,4 +5,4 @@
 /composer.lock
 /coverage.cobertura.xml
 desktop.ini
-/.phpunit.result.cache
+.phpunit.result.cache
