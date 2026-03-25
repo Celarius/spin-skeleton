@@ -8,7 +8,7 @@
 
 namespace App\Controllers;
 
-use \Spin\Core\Controller;
+use \App\Controllers\AbstractController;
 
 abstract class AbstractRestController extends Controller
 {

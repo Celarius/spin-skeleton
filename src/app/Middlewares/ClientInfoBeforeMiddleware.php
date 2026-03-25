@@ -2,9 +2,9 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class ClientInfoBeforeMiddleware extends Middleware
+class ClientInfoBeforeMiddleware extends AbstractMiddleware
 {
   /**
    * Collect client browser/device information and store it in the container.

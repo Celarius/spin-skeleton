@@ -2,9 +2,9 @@
 
 namespace App\Middlewares;
 
-use Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class ResponseLogAfterMiddleware extends Middleware
+class ResponseLogAfterMiddleware extends AbstractMiddleware
 {
   /**
    * Let the Middleware do it's job

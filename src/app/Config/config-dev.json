@@ -86,6 +86,9 @@
       }
     }
   },
+  "storage": {
+    "shared": "${env:SHARED_STORAGE_PATH}"
+  },
   "connections": {
     "example_mysql": {
       "type": "Pdo",

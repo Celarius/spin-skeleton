@@ -222,6 +222,33 @@ Requires `predis/predis` package.
 }
 ```
 
+### storage
+
+Controls the shared storage path for files that must persist across instances or be shared in a multi-container environment:
+
+```json
+"storage": {
+  "shared": "${env:SHARED_STORAGE_PATH}"
+}
+```
+
+| Key | Description |
+|-----|-------------|
+| `shared` | Base path for shared storage. The framework appends `/{environment}/{appCode}` to produce the final path (e.g. `/mnt/shared/dev/myapp`). Omit or set to empty string to fall back to the local `{basePath}/storage` folder. |
+
+Add `SHARED_STORAGE_PATH` to your `.env` file when deploying to a shared-storage environment:
+
+```env
+SHARED_STORAGE_PATH=/mnt/shared
+```
+
+Access the resolved path in code:
+
+```php
+$sharedPath = app()->getSharedStoragePath();
+$localPath  = app()->getStoragePath();
+```
+
 ### connections
 
 Database connection definitions:

@@ -10,7 +10,6 @@ namespace App\Classes\Managers;
 
 use \GuzzleHttp\Psr7\Response;
 use \App\Classes\Managers\AbstractManager;
-use \App\Classes\Managers\SessionsManager;
 
 class SessionManager extends AbstractManager
 {

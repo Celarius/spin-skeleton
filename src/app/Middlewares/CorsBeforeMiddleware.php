@@ -10,9 +10,9 @@
 
 namespace App\Middlewares;
 
-use Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class CorsBeforeMiddleware extends Middleware
+class CorsBeforeMiddleware extends AbstractMiddleware
 {
   /** @var        string          [description] */
   protected $origin;

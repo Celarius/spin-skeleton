@@ -2,9 +2,9 @@
 
 namespace App\Middlewares;
 
-use Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class RequestIdBeforeMiddleware extends Middleware
+class RequestIdBeforeMiddleware extends AbstractMiddleware
 {
   /**
    * Add a unique 'requestId' to the container

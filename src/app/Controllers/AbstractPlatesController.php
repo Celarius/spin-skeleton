@@ -10,9 +10,9 @@
 namespace App\Controllers;
 
 use \League\Plates\Engine;
-use \Spin\Core\Controller;
+use \App\Controllers\AbstractController;
 
-abstract class AbstractPlatesController extends Controller
+abstract class AbstractPlatesController extends AbstractController
 {
   /** @var Engine       The League Template Engine */
   protected Engine $engine;

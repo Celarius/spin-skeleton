@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use \Spin\Core\Controller;
+use \App\Controllers\AbstractController;
 use \Psr\Http\Message\ResponseInterface;
 
-class Error4xxController extends Controller
+class Error4xxController extends AbstractController
 {
   /**
    * Handle 4xx error responses

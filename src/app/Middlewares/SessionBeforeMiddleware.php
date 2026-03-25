@@ -2,9 +2,9 @@
 
 namespace App\Middlewares;
 
-use Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class SessionBeforeMiddleware extends Middleware
+class SessionBeforeMiddleware extends AbstractMiddleware
 {
   /**
    * Retreive or Set the SessionId cookie for the request

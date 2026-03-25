@@ -18,10 +18,10 @@
 
 namespace App\Middlewares;
 
-use Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 use Spin\Helpers\JWT;
 
-class AuthHttpBeforeMiddleware extends Middleware
+class AuthHttpBeforeMiddleware extends AbstractMiddleware
 {
   /** @var        string          Secret string */
   protected $secret;

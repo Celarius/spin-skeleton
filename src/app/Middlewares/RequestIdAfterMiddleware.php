@@ -2,9 +2,9 @@
 
 namespace App\Middlewares;
 
-use Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class RequestIdAfterMiddleware extends Middleware
+class RequestIdAfterMiddleware extends AbstractMiddleware
 {
   /** @var string */
   protected string $requestId;

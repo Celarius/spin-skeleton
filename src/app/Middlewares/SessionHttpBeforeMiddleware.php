@@ -2,9 +2,9 @@
 
 namespace App\Middlewares;
 
-use \Spin\Core\Middleware;
+use \App\Middlewares\AbstractMiddleware;
 
-class SessionHttpBeforeMiddleware extends Middleware
+class SessionHttpBeforeMiddleware extends AbstractMiddleware
 {
   /**
    * Validate session cookie against an external sessions service.
